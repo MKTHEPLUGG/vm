@@ -36,22 +36,32 @@ runs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
+
     - name: Azure Login
       uses: Azure/login@v1.4.6
       with:
         client-id: ${{ inputs.azureClientId }}
         tenant-id: ${{ inputs.azureTenantId }}
         subscription-id: ${{ inputs.azureSubscriptionId }}
+
+    - name: Get Subscription ID
+      run: |
+        SUBSCRIPTION_ID=$(az account show --query 'id' -o tsv)
+        echo "SUBSCRIPTION_ID"
+        echo "SUBSCRIPTION_ID=$SUBSCRIPTION_ID" >> $GITHUB_ENV
+
     - name: Install GitVersion
       uses: gittools/actions/gitversion/setup@v0
       with:
         versionSpec: '5.x'
+
     - name: Determine Version
       id: gitversion
       uses: gittools/actions/gitversion/execute@v0
       with:
         useConfigFile: true
         configFilePath: ./gitversion.yml
+
     - name: tag the repo
       if: ${{ github.ref == 'refs/heads/master' }}
       shell: bash
@@ -60,35 +70,42 @@ runs:
         echo ${{ env.semVer }}
         git tag ${{ steps.gitversion.outputs.semVer }}
         git push origin ${{ steps.gitversion.outputs.semVer }}
+
     - name: Replace tokens
       uses: cschleiden/replace-tokens@v1.2
       with:
         files: parameters/${{ inputs.environment }}/${{ inputs.templateFile }}_${{ inputs.location }}.bicepparam
+
     - name: Copy template
       shell: bash 
       run: |
         mkdir -p ${{ github.workspace }}/artifact/${{ inputs.templateFile }}_${{ inputs.environment }}_${{ inputs.location }}/templates
         cp ./templates/${{ inputs.templateFile }}.bicep ${{ github.workspace }}/artifact/${{ inputs.templateFile }}_${{ inputs.environment }}_${{ inputs.location }}/templates
+
     - name: Copy parameters
       shell: bash 
       run: |
         mkdir -p ${{ github.workspace }}/artifact/${{ inputs.templateFile }}_${{ inputs.environment }}_${{ inputs.location }}/parameters
         cp ./parameters/${{ inputs.environment }}/${{ inputs.templateFile }}_${{ inputs.location }}.bicepparam ${{ github.workspace }}/artifact/${{ inputs.templateFile }}_${{ inputs.environment }}_${{ inputs.location }}/parameters
+    
     - name: Publish artifacts
       uses: actions/upload-artifact@v3
       with:
         name: artifact_${{ inputs.templateFile }}_${{ inputs.environment }}_${{ inputs.location }}
         path: ${{ github.workspace }}/artifact/${{ inputs.templateFile }}_${{ inputs.environment }}_${{ inputs.location }}
+    
     - name: Adjust using directive in parameters file
       shell: bash 
       run: |
         sed -i 's|../../templates/main.bicep|${{ github.workspace }}/artifact/main_int_we/templates/main.bicep|' ./artifact/main_int_we/parameters/main_we.bicepparam
+    
     - name: Move files and update references
       shell: bash
       run: |
         cp ./artifact/main_int_we/templates/main.bicep .
         cp ./artifact/main_int_we/parameters/main_we.bicepparam .
         sed -i 's|/home/runner/work/vm/vm/artifact/main_int_we/templates/main.bicep|main.bicep|' main_we.bicepparam
+    
     - name: Deploy using the artifact
       shell: bash    
       run: |
