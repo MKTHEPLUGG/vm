@@ -5,7 +5,7 @@ param location string
 param environment string
 param vmAdmin string
 param vmSize string
-param subnetId string = '/subscriptions/${subscriptionId}/resourceGroups/#{RESOURCE_GROUP}#/providers/Microsoft.Network/virtualNetworks/${vnetName}/subnets/${subnetName}'
+param subnetId string
 param bootStorage string
 @secure()
 param vmAdminPassword string

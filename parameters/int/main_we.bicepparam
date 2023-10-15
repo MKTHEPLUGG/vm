@@ -1,17 +1,14 @@
-
 param purpose string = 'shared'
 
-param location string ='#{LOCATION}#'
+param location string = 'westeurope'
 
-param environment string = '#{ENVIRONMENT}#'
+param environment string = 'integration'
 
 param vmAdmin string = 'adminUser'
 
 param vmSize string = 'Standard_D2s_v3'
 
 param subscriptionId string = ''
-
-param subscriptionId string = '${SUBSCRIPTION_ID}'
 
 param bootStorage string = 'mystorageacc'
 
