@@ -13,7 +13,7 @@ param osOffer string
 param osSKU string
 param osVersion string
 
-module vmModule 'br:eruza123.azurecr.io/bicep/modules/vm:v0.1.10' = {
+module vmModule 'br:eruza123.azurecr.io/bicep/modules/vm:v0.1.11' = {
   name: 'vmDeploy'
   params: {
     location: location
