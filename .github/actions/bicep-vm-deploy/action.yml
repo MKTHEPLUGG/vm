@@ -44,11 +44,11 @@ runs:
         tenant-id: ${{ inputs.azureTenantId }}
         subscription-id: ${{ inputs.azureSubscriptionId }}
 
-    - name: Get Subscription ID
-      run: |
-        SUBSCRIPTION_ID=$(az account show --query 'id' -o tsv)
-        echo "SUBSCRIPTION_ID"
-        echo "SUBSCRIPTION_ID=$SUBSCRIPTION_ID" >> $GITHUB_ENV
+    # - name: Get Subscription ID
+    #   run: |
+    #     SUBSCRIPTION_ID=$(az account show --query 'id' -o tsv)
+    #     echo "SUBSCRIPTION_ID"
+    #     echo "SUBSCRIPTION_ID=$SUBSCRIPTION_ID" >> $GITHUB_ENV
 
     - name: Install GitVersion
       uses: gittools/actions/gitversion/setup@v0
