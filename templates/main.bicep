@@ -5,7 +5,7 @@ param location string
 param environment string
 param vmAdmin string
 param vmSize string
-param subnetId string
+param subnetId string = '/subscriptions/${subscriptionId}/resourceGroups/#{RESOURCE_GROUP}#/providers/Microsoft.Network/virtualNetworks/${vnetName}/subnets/${subnetName}'
 param bootStorage string
 @secure()
 param vmAdminPassword string
@@ -36,3 +36,5 @@ module vmModule 'br:eruza123.azurecr.io/bicep/modules/vm:v0.1.6 = {
     gitRepo: gitRepo
   }
 }
+
+
