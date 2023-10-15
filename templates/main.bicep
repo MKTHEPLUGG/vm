@@ -16,14 +16,13 @@ param gitRepo string
 param gitRef string
 
 module vmModule 'br:eruza123.azurecr.io/bicep/modules/vm:v0.1.9' = {
-  name: 'vmDeploy-${time}'
+  name: 'vmDeploy'
   params: {
     location: location
     environment: environment
     purpose: purpose
     vmAdmin: vmAdmin
     vmSize: vmSize
-    subnetId: vmModule.outputs.subnetID
     bootStorage: bootStorage
     vmAdminPassword: vmAdminPassword
     osPublisher: osPublisher
