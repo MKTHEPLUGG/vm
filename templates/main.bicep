@@ -5,7 +5,6 @@ param location string
 param environment string
 param vmAdmin string
 param vmSize string
-param subnetId string
 param bootStorage string
 @secure()
 param vmAdminPassword string
@@ -16,7 +15,7 @@ param osVersion string
 param gitRepo string
 param gitRef string
 
-module vmModule 'br:eruza123.azurecr.io/bicep/modules/vm:v0.1.7' = {
+module vmModule 'br:eruza123.azurecr.io/bicep/modules/vm:v0.1.8' = {
   name: 'vmDeploy-${time}'
   params: {
     location: location
@@ -24,7 +23,7 @@ module vmModule 'br:eruza123.azurecr.io/bicep/modules/vm:v0.1.7' = {
     purpose: purpose
     vmAdmin: vmAdmin
     vmSize: vmSize
-    subnetId: subnetId
+    subnetId: vmModule.outputs.subnetID
     bootStorage: bootStorage
     vmAdminPassword: vmAdminPassword
     osPublisher: osPublisher
