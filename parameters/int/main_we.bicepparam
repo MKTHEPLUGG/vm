@@ -9,8 +9,6 @@ param vmAdminPassword = 'mySecurePassword123!'
 param vmAdmin = 'adminUser'
 param vmSize= 'Standard_D2s_v3'
 
-param subscriptionId = ''
-
 param bootStorage = 'mystorageacc'
 
 param osPublisher = 'Canonical'
