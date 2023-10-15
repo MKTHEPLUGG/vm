@@ -12,9 +12,10 @@ param osPublisher string
 param osOffer string 
 param osSKU string
 param osVersion string
+param time string = utcNow()
 
 module vmModule 'br:eruza123.azurecr.io/bicep/modules/vm:v0.1.11' = {
-  name: 'vmDeploy'
+  name: 'vmDeploy-${time}'
   params: {
     location: location
     environment: environment
