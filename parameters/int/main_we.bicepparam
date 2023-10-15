@@ -1,3 +1,5 @@
+using '../../templates/main.bicep'
+
 param purpose = 'shared'
 param location = 'westeurope'
 param environment = 'integration'
