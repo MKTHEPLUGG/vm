@@ -1,30 +1,21 @@
-param purpose string = 'shared'
-
-param location string = 'westeurope'
-
-param environment string = 'integration'
-
-param vmAdmin string = 'adminUser'
-
-param vmSize string = 'Standard_D2s_v3'
-
-param subscriptionId string = ''
-
-param bootStorage string = 'mystorageacc'
+param purpose = 'shared'
+param location = 'westeurope'
+param environment = 'integration'
 
 @secure()
-param vmAdminPassword string = 'mySecurePassword123!'
+param vmAdminPassword = 'mySecurePassword123!'
+param vmAdmin = 'adminUser'
+param vmSize= 'Standard_D2s_v3'
 
-param osPublisher string = 'Canonical'
+param subscriptionId = ''
 
-param osOffer string = 'UbuntuServer'
+param bootStorage = 'mystorageacc'
 
-param osSKU string = '18.04-LTS'
+param osPublisher = 'Canonical'
+param osOffer = 'UbuntuServer'
+param osSKU = '18.04-LTS'
+param osVersion = 'latest'
 
-
-param osVersion string = 'latest'
-
-param gitRepo string = '#{Build.Repository.Name}#'
-
-param gitRef string = '#{GitVersion.SemVer}#'
+param gitRepo = '#{Build.Repository.Name}#'
+param gitRef = '#{GitVersion.SemVer}#'
 
