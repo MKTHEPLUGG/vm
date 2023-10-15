@@ -11,10 +11,9 @@ param environment= '#{environment}'
 
 action
 
-````github actions
+```YAML
     - name: Replace tokens
       uses: cschleiden/replace-tokens@v1.2
       with:
         files: parameters/${{ inputs.environment }}/${{ inputs.templateFile }}_${{ inputs.location }}.bicepparam
-
-``
+```
