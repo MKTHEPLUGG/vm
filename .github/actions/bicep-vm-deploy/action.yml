@@ -76,11 +76,11 @@ runs:
       with:
         files: parameters/${{ inputs.environment }}/${{ inputs.templateFile }}_${{ inputs.location }}.bicepparam
       # you can use env vars from pipeline in .bicepparam file via token replace '#{string}#' in the specified file will be replace, define env vars here so they are accessible
-      env:
-        ENVIRONMENT: ${{ env.ENVIRONMENT }}
-        TEMPLATE_FILE: ${{ env.TEMPLATE_FILE }}
-        LOCATION: ${{ env.LOCATION }}
-        RESOURCE_GROUP: ${{ env.RESOURCE_GROUP }}
+      # env:
+      #   ENVIRONMENT: ${{ env.ENVIRONMENT }}
+      #   TEMPLATE_FILE: ${{ env.TEMPLATE_FILE }}
+      #   LOCATION: ${{ env.LOCATION }}
+      #   RESOURCE_GROUP: ${{ env.RESOURCE_GROUP }}
 
     - name: Copy template
       shell: bash 
@@ -116,5 +116,3 @@ runs:
       shell: bash    
       run: |
         az deployment group create --template-file ./main.bicep --parameters ./main_we.bicepparam --resource-group ${{ inputs.resourceGroup }}
-      env:
-        SUBSCRIPTION_ID: ${{ env.SUBSCRIPTION_ID }}
