@@ -9,7 +9,7 @@ param vmAdminPassword = 'mySecurePassword123!'
 param vmAdmin = 'adminUser'
 param vmSize= 'Standard_D2s_v3'
 
-param bootStorage = 'RandomBandomPhanton'
+param bootStorage = 'randombandomphanton'
 
 param osPublisher = 'Canonical'
 param osOffer = 'UbuntuServer'
