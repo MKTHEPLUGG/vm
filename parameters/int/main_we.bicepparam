@@ -15,7 +15,3 @@ param osPublisher = 'Canonical'
 param osOffer = 'UbuntuServer'
 param osSKU = '18.04-LTS'
 param osVersion = 'latest'
-
-param gitRepo = '#{Build.Repository.Name}#'
-param gitRef = '#{GitVersion.SemVer}#'
-
